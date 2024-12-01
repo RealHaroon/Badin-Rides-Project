@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register As Customer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f8f8f8;;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .form-container {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            padding-right: 44px;
+            padding-left: 30px;
+            padding-bottom: 14px;
+            box-shadow: 0 6px 6px rgba(0, 0, 0, 0.2);
+            width: 300px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            padding-left:7px ;
+            padding-top: 5px;
+            color: #007bff;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            outline: none;
+            font-size: 16px;
+            background-color: #f9f9f9;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="password"]:focus,
+        textarea:focus {
+            border-color: #007bff;
+            background-color: #fff;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px 10px;
+            padding-bottom: 10px;
+            border: none;
+            border-radius: 7px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: white;
+            color: #007bff;
+            border: 1px solid #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Register As Customer</h2>
+        <form action="submit-form.php" method="POST">
+            <input type="text" name="full_name" placeholder="Full Name" required>
+            <input type="text" name="phone" placeholder="Phone Number" required>
+            <textarea name="address" placeholder="Address" rows="3" required></textarea>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit">Sign In</button>
+        </form>
+    </div>
+</body>
+</html>

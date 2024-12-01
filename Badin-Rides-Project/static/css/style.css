@@ -101,7 +101,7 @@ body {
     background: rgba(39, 72, 182, 0.7); /* Default translucent blue */
     backdrop-filter: blur(20px);
     font-family: 'Arial Rounded MT Bold', Arial, sans-serif;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1);
     transition: background 0.3s ease, color 0.3s ease;
 }
 
@@ -109,6 +109,7 @@ body {
     font-family: 'Arial Rounded MT Bold', Arial, sans-serif;
     /* font-family: 'Uber Move Text', sans-serif; */
     font-size: 28px;
+    font-weight: 400;
     color: white;
     text-transform: uppercase; /* Optional: make the text uppercase */
     text-decoration: none; /* Remove underline */
