@@ -1,0 +1,201 @@
+
+@import url('https://fonts.cdnfonts.com/css/uber-move-text');
+:root {
+    --primary-color: #2563eb;
+    --secondary-color: #1e40af;
+    --accent-color: #3b82f6;
+    --text-color: #1f2937;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: var(--text-color);
+}
+
+.hero-section {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 7rem 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-section::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: url('assets/images/pattern.svg') repeat;
+    opacity: 0.1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+}
+/* Keyframes for fade-in animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+.hero-section h1 {
+    animation: fadeInUp 1s ease-out;
+}
+
+/* Animation for paragraph */
+.hero-section p {
+    animation: fadeInUp 1.5s ease-out;
+    animation-delay: 0.5s;
+    animation-fill-mode: both; /* Ensures the animation stays applied */
+}
+
+/* Button fade-in with delay */
+
+.hero-section img {
+    animation: fadeInUp 1.5s ease-out;
+    animation-delay: 1s;
+    animation-fill-mode: both; /* Keeps the animation's final state applied */
+}
+
+.feature-card {
+    border: none;
+    border-radius: 1rem;
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+}
+
+.stat-card {
+    background: white;
+    border-radius: 1rem;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.stat-card:hover {
+    transform: scale(1.05); /* Slight zoom effect */
+    box-shadow: 0 6px 8px -1px rgba(0, 0, 0, 0.2); /* Slightly enhanced shadow */
+}
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+/* Navbar default styles */
+.navbar {
+    background: rgba(39, 72, 182, 0.7); /* Default translucent blue */
+    backdrop-filter: blur(20px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.navbar .navbar-brand img {
+    filter: invert(0); /* Default non-inverted (white logo) */
+    transition: filter 0.3s ease;
+    font-family: 'Uber Move Text', sans-serif;
+}
+
+.navbar .nav-link {
+    color: white !important; /* Default white links */
+    font-weight: 500;
+    position: relative;
+    text-decoration: none; /* Remove default underline */
+}
+
+.navbar .btn-light {
+    color: #1e40af; /* Default blue buttons */
+    background: white;
+    border: 1px solid white;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.navbar .btn-light:hover {
+    background: #16369e;
+    color: white;
+}
+
+/* When scrolled, add this class to the navbar */
+.navbar.scrolled {
+    background: white; /* Change navbar background to solid white */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navbar.scrolled .navbar-brand img {
+    filter: invert(1); /* Invert logo to make it visible on white */
+}
+
+.navbar.scrolled .nav-link {
+    color: #0b2780 !important; /* Change link color to blue */
+}
+
+/* Button styles when scrolled */
+.navbar.scrolled .btn-light {
+    color: white;
+    background: #0b2780; /* Change button to blue */
+    border: 1px solid #0b2780;
+}
+
+.navbar.scrolled .btn-light:hover {
+    background: white;
+    color: #0b2780;
+}
+
+/* Hover underline effect for nav links */
+.navbar .nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background-color: white;  /* Default underline color */
+    left: 0;
+    bottom: -5px;  /* Distance from the text */
+    transition: width 0.3s ease;
+}
+
+/* Expand underline on hover */
+.navbar .nav-link:hover::after {
+    width: 100%; /* Full width on hover */
+}
+
+/* When navbar is scrolled, change underline color */
+.navbar.scrolled .nav-link::after {
+    background-color:#0b2780;  /* Underline color in scrolled state */
+}
+
+.navbar.scrolled .nav-link:hover::after {
+    width: 100%;
+}
+
+
+.btn-custom {
+    padding: 0.75rem 2rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background-color: var(--accent-color);
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-2px);
+}
+
