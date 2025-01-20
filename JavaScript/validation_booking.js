@@ -3,19 +3,25 @@ document.addEventListener('DOMContentLoaded', function() {
     const receipt = document.querySelector('.receipt');
     const vehicleSelect = document.getElementById('vehicleType');
     const riderPhoneInput = document.getElementById('riderPhone');
+    const vehicleNumberInput  = document.getElementById('vehicleNumber');
 
     // Sample available riders data (this would come from your database)
     const availableRiders = {
         'bike': [
             { id: 'B1', phone: '1234567890', area: 'North' },
-            { id: 'B2', phone: '2345678901', area: 'South' }
+            { id: 'B1', vehicleNum:'KES-23', area: 'North' },
+            { id: 'B2', phone: '2345678901', area: 'South' },
+            { id: 'B1', vehicleNum:'KID-33', area: 'South' }
         ],
         'car': [
             { id: 'C1', phone: '3456789012', area: 'East' },
-            { id: 'C2', phone: '4567890123', area: 'West' }
+            { id: 'C1', vehicleNum:'MPK-25', area: 'East' },
+            { id: 'C2', phone: '4567890123', area: 'West' },
+            { id: 'C1', vehicleNum:'NPM-45', area: 'West' },
         ],
         'van': [
-            { id: 'V1', phone: '5678901234', area: 'Central' }
+            { id: 'V1', phone: '5678901234', area: 'Central' },
+            { id: 'V1', vehicleNum: 'HEB-11', area: 'Central' }
         ]
     };
 
@@ -82,11 +88,14 @@ document.addEventListener('DOMContentLoaded', function() {
     vehicleSelect.addEventListener('change', function() {
         const selectedType = this.value;
         if (selectedType && availableRiders[selectedType]) {
-            // In a real application, you would filter riders by area
+            // In a real application, we would filter riders by area
             const rider = availableRiders[selectedType][0];
             riderPhoneInput.value = rider.phone;
+            const number = availableRiders[selectedType][0];
+            vehicleNumberInput.value = number.vehicleNum;
         } else {
             riderPhoneInput.value = '';
+            vehicleNumberInput.value = '';
         }
     });
 
@@ -121,6 +130,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 pickupLocation: document.getElementById('pickupLocation').value,
                 destination: document.getElementById('destination').value,
                 vehicleType: document.getElementById('vehicleType').value,
+                vehicleNumber:document.getElementById('vehicleNumber').value,
                 riderPhone: document.getElementById('riderPhone').value,
                 bookingTime: new Date().toLocaleString()
             };
@@ -130,6 +140,7 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('receiptName').textContent = bookingData.customerName;
             document.getElementById('receiptPhone').textContent = bookingData.customerPhone;
             document.getElementById('receiptVehicle').textContent = bookingData.vehicleType;
+            document.getElementById('receiptVehicleNumber').textContent = bookingData.vehicleNumber;
             document.getElementById('receiptRiderPhone').textContent = bookingData.riderPhone;
             document.getElementById('receiptTime').textContent = bookingData.bookingTime;
             document.getElementById('receiptPickup').textContent = bookingData.pickupLocation;

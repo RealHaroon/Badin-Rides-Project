@@ -53,10 +53,29 @@
             opacity: 0.1;
         }
 
+        .navbar {
+            transition: all 0.3s ease;
+            padding: 1rem 0;
+        }
+
+        .navbar.scrolled {
+            background-color: var(--primary-color) !important;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 0.5rem 0;
+        }
+
+        .navbar-brand {
+            font-weight: 600;
+            font-size: 1.5rem;
+            color: white !important;
+        }
+
         .nav-link {
             color: white !important;
             margin: 0 1rem;
             position: relative;
+            font-weight: 500;
+            transition: all 0.3s ease;
         }
 
         .nav-link::after {
@@ -64,7 +83,7 @@
             position: absolute;
             width: 0;
             height: 2px;
-            bottom: 0;
+            bottom: -2px;
             left: 0;
             background-color: white;
             transition: width 0.3s ease;
@@ -72,6 +91,103 @@
 
         .nav-link:hover::after {
             width: 100%;
+        }
+
+        .navbar-toggler {
+            border: none;
+            padding: 0.5rem;
+        }
+
+        .navbar-toggler:focus {
+            box-shadow: none;
+            outline: none;
+        }
+
+        .navbar-toggler-icon {
+            width: 24px;
+            height: 24px;
+            background-image: none;
+            position: relative;
+            border-bottom: 2px solid white;
+            transition: all 300ms linear;
+        }
+
+        .navbar-toggler-icon:after, 
+        .navbar-toggler-icon:before {
+            width: 24px;
+            position: absolute;
+            height: 2px;
+            background-color: white;
+            top: 0;
+            left: 0;
+            content: '';
+            z-index: 2;
+            transition: all 300ms linear;
+        }
+
+        .navbar-toggler-icon:after {
+            top: 8px;
+        }
+
+        .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon:after {
+            transform: rotate(45deg);
+            background-color: white;
+            height: 2px;
+        }
+
+        .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
+            border-color: transparent;
+        }
+
+        .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon:before {
+            transform: translateY(8px) rotate(-45deg);
+            background-color: white;
+            height: 2px;
+        }
+
+        .btn-light {
+            background-color: white;
+            color: var(--primary-color) !important;
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-light:hover {
+            background-color: #f8f9fa;
+            transform: translateY(-2px);
+        }
+
+        /* Mobile Responsive Styles */
+        @media (max-width: 991.98px) {
+            .navbar-collapse {
+                background: #2563eb00;
+                border-radius: 8px;
+                padding: 1rem;
+                margin-top: 0.5rem;
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-link {
+                margin: 0.5rem 0;
+                padding: 0.5rem 1rem;
+                border-radius: 4px;
+            }
+
+            .nav-link:hover {
+                background-color: rgba(255, 255, 255, 0.1);
+            }
+
+            .nav-link::after {
+                display: none;
+            }
+
+            .btn-light {
+                width: 100%;
+                text-align: center;
+                margin: 0.5rem 0;
+            }
         }
 
         .service-card {
@@ -107,11 +223,6 @@
             color: var(--primary-color);
         }
 
-        .navbar.scrolled {
-            background-color: var(--primary-color) !important;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
         #map {
             height: 400px;
             width: 100%;
@@ -124,28 +235,26 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-transparent">
         <div class="container">
-            <!-- <a class="navbar-brand" href="#">
-                <img src="../static/images/logo.png" alt="Badin Rides" height="40">
-            </a> -->
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="./service.html">
                 <i class="fas fa-car-side"></i> BadinRides
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="../index.html">Home</a>
+                        <a class="nav-link active" href="../index.html">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="./service.html">Services</a>
+                        <a class="nav-link" href="./service.html">Services</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="./become_rider.html">Riders</a>
+                        <a class="nav-link" href="./become_rider.html">Become Rider</a>
                     </li>
                     <li class="nav-item">
-                        <a class="btn btn-light ms-3" href="../templates/booking.html">Book Now</a>
+                        <a class="btn btn-light" href="./booking.html">Book Now</a>
                     </li>
                 </ul>
             </div>
@@ -278,21 +387,28 @@
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Change navbar appearance on scroll
+        // Enhanced scroll behavior
         window.addEventListener("scroll", function () {
             const navbar = document.querySelector(".navbar");
-            const heroSection = document.querySelector(".hero-section");
-            
-            // Get the height of the Hero section
-            const heroHeight = heroSection.offsetHeight;
-            
-            // Check if the scroll position has passed the Hero section
-            if (window.scrollY > heroHeight) {
+            if (window.scrollY > 50) {
                 navbar.classList.add("scrolled");
             } else {
                 navbar.classList.remove("scrolled");
             }
+        });
+
+        // Add active class to current nav item
+        document.addEventListener("DOMContentLoaded", function() {
+            const currentLocation = window.location.pathname;
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === currentLocation) {
+                    link.classList.add('active');
+                }
+            });
         });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
