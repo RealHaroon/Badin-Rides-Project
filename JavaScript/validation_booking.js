@@ -3,7 +3,32 @@ document.addEventListener('DOMContentLoaded', function () {
     const receipt = document.querySelector('.receipt');
     const vehicleSelect = document.getElementById('vehicleType');
     const riderPhoneInput = document.getElementById('riderPhone');
-    const vehicleNumberInput = document.getElementById('vehicleNumber');
+
+    // Sample available riders data (this would come from your database)
+    const availableRiders = {
+        'bike': [
+            { id: 'B1', phone: '1234567890', area: 'North' },
+            { id: 'B2', phone: '2345678901', area: 'South' }
+        ],
+        'car': [
+            { id: 'C1', phone: '3456789012', area: 'East' },
+            { id: 'C2', phone: '4567890123', area: 'West' }
+        ],
+        'van': [
+            { id: 'V1', phone: '5678901234', area: 'Central' }
+        ]
+    };
+
+    // Populate vehicle types
+    function populateVehicleTypes() {
+        const types = Object.keys(availableRiders);
+        types.forEach(type => {
+            const option = document.createElement('option');
+            option.value = type;
+            option.textContent = type.charAt(0).toUpperCase() + type.slice(1);
+            vehicleSelect.appendChild(option);
+        });
+    }
 
     // Validation functions
     const validators = {
@@ -43,16 +68,17 @@ document.addEventListener('DOMContentLoaded', function () {
         return isValid;
     }
 
-    // Populate vehicle types
-    function populateVehicleTypes() {
-        const types = ['bike', 'car', 'van']; // Replace with PHP-generated options if needed
-        types.forEach((type) => {
-            const option = document.createElement('option');
-            option.value = type;
-            option.textContent = type.charAt(0).toUpperCase() + type.slice(1);
-            vehicleSelect.appendChild(option);
-        });
-    }
+    // Handle vehicle type selection
+    vehicleSelect.addEventListener('change', function() {
+        const selectedType = this.value;
+        if (selectedType && availableRiders[selectedType]) {
+            // In a real application, you would filter riders by area
+            const rider = availableRiders[selectedType][0];
+            riderPhoneInput.value = rider.phone;
+        } else {
+            riderPhoneInput.value = '';
+        }
+    });
 
     // Generate booking ID
     function generateBookingId() {
@@ -85,7 +111,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 pickupLocation: document.getElementById('pickupLocation').value,
                 destination: document.getElementById('destination').value,
                 vehicleType: document.getElementById('vehicleType').value,
-                vehicleNumber: document.getElementById('vehicleNumber').value,
                 riderPhone: document.getElementById('riderPhone').value,
                 bookingTime: new Date().toLocaleString()
             };
