@@ -104,9 +104,10 @@ body {
     transition: background 0.3s ease, color 0.3s ease;
 }
 
-.navbar .navbar-brand img {
+.nav-link.navbar-brand{
     filter: invert(0); /* Default non-inverted (white logo) */
-    transition: filter 0.3s ease;
+    font-weight: 300;
+    font-size: large;
     font-family: 'Uber Move Text', sans-serif;
 }
 
