@@ -1,21 +1,27 @@
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('bookingForm');
     const receipt = document.querySelector('.receipt');
     const vehicleSelect = document.getElementById('vehicleType');
     const riderPhoneInput = document.getElementById('riderPhone');
+    const vehicleNumberInput  = document.getElementById('vehicleNumber');
 
     // Sample available riders data (this would come from your database)
     const availableRiders = {
         'bike': [
             { id: 'B1', phone: '1234567890', area: 'North' },
-            { id: 'B2', phone: '2345678901', area: 'South' }
+            { id: 'B1', vehicleNum:'KES-23', area: 'North' },
+            { id: 'B2', phone: '2345678901', area: 'South' },
+            { id: 'B1', vehicleNum:'KID-33', area: 'South' }
         ],
         'car': [
             { id: 'C1', phone: '3456789012', area: 'East' },
-            { id: 'C2', phone: '4567890123', area: 'West' }
+            { id: 'C1', vehicleNum:'MPK-25', area: 'East' },
+            { id: 'C2', phone: '4567890123', area: 'West' },
+            { id: 'C1', vehicleNum:'NPM-45', area: 'West' },
         ],
         'van': [
-            { id: 'V1', phone: '5678901234', area: 'Central' }
+            { id: 'V1', phone: '5678901234', area: 'Central' },
+            { id: 'V1', vehicleNum: 'HEB-11', area: 'Central' }
         ]
     };
 
@@ -32,22 +38,32 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Validation functions
     const validators = {
-        customerName: (value) => value.length >= 2 && /^[a-zA-Z\s]+$/.test(value),
-        customerPhone: (value) => /^\d{10}$/.test(value),
-        pickupLocation: (value) => value.length >= 3,
-        destination: (value) => value.length >= 3,
-        vehicleType: (value) => value !== ''
+        customerName: (value) => {
+            return value.length >= 2 && /^[a-zA-Z\s]+$/.test(value);
+        },
+        customerPhone: (value) => {
+            return /^\d{10}$/.test(value);
+        },
+        pickupLocation: (value) => {
+            return value.length >= 3;
+        },
+        destination: (value) => {
+            return value.length >= 3;
+        },
+        vehicleType: (value) => {
+            return value !== '';
+        }
     };
 
     // Real-time validation
-    Object.keys(validators).forEach((field) => {
+    Object.keys(validators).forEach(field => {
         const input = document.getElementById(field);
         if (input) {
-            input.addEventListener('input', function () {
+            input.addEventListener('input', function() {
                 validateField(this);
             });
 
-            input.addEventListener('blur', function () {
+            input.addEventListener('blur', function() {
                 validateField(this);
             });
         }
@@ -56,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function validateField(input) {
         const value = input.value;
         const isValid = validators[input.id](value);
-
+        
         if (isValid) {
             input.classList.remove('is-invalid');
             input.classList.add('is-valid');
@@ -64,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function () {
             input.classList.remove('is-valid');
             input.classList.add('is-invalid');
         }
-
+        
         return isValid;
     }
 
@@ -72,11 +88,14 @@ document.addEventListener('DOMContentLoaded', function () {
     vehicleSelect.addEventListener('change', function() {
         const selectedType = this.value;
         if (selectedType && availableRiders[selectedType]) {
-            // In a real application, you would filter riders by area
+            // In a real application, we would filter riders by area
             const rider = availableRiders[selectedType][0];
             riderPhoneInput.value = rider.phone;
+            const number = availableRiders[selectedType][0];
+            vehicleNumberInput.value = number.vehicleNum;
         } else {
             riderPhoneInput.value = '';
+            vehicleNumberInput.value = '';
         }
     });
 
@@ -86,13 +105,13 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Form submission
-    form.addEventListener('submit', function (e) {
+    form.addEventListener('submit', function(e) {
         e.preventDefault();
-
+        
         let isFormValid = true;
-
+        
         // Validate all fields
-        Object.keys(validators).forEach((field) => {
+        Object.keys(validators).forEach(field => {
             const input = document.getElementById(field);
             if (input) {
                 const isValid = validateField(input);
@@ -111,6 +130,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 pickupLocation: document.getElementById('pickupLocation').value,
                 destination: document.getElementById('destination').value,
                 vehicleType: document.getElementById('vehicleType').value,
+                vehicleNumber:document.getElementById('vehicleNumber').value,
                 riderPhone: document.getElementById('riderPhone').value,
                 bookingTime: new Date().toLocaleString()
             };
@@ -129,6 +149,9 @@ document.addEventListener('DOMContentLoaded', function () {
             // Hide form and show receipt
             form.style.display = 'none';
             receipt.style.display = 'block';
+
+            // Here you would typically send the booking data to your backend
+            console.log('Booking data:', bookingData);
         }
     });
 
