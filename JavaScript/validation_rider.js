@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Validation functions
     const validators = {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         name: (value) => {
             const isValid = value.length >= 2 && /^[a-zA-Z\s]+$/.test(value);
             return {
@@ -72,6 +73,8 @@ document.addEventListener('DOMContentLoaded', function () {
             };
         },
 =======
+=======
+>>>>>>> Stashed changes
         name: (value) => /^[a-zA-Z\s]{2,}$/.test(value) ? '' : 'Name must be at least 2 characters and contain only letters and spaces.',
         phone: (value) => /^\d{10}$/.test(value) ? '' : 'Phone number must be exactly 10 digits.',
         location: (value) => value.length >= 3 ? '' : 'Location must be at least 3 characters long.',
@@ -85,6 +88,9 @@ document.addEventListener('DOMContentLoaded', function () {
             ? ''
             : 'Password must be at least 8 characters with uppercase, lowercase, and numbers.',
         confirmPassword: (value) => value === document.getElementById('password').value ? '' : 'Passwords do not match.',
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     };
 
@@ -200,6 +206,7 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const path = require('path');
 
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
     // Real-time validation
     Object.keys(validators).forEach((field) => {
@@ -354,6 +361,29 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
+=======
+// Set up Express app
+const app = express();
+const port = 3000;
+
+// Middleware for parsing form data
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Oracle DB connection details
+const dbConfig = {
+    user: 'C##USER_HAROON',          // Replace with your Oracle DB username
+    password: 'haroon112233',        // Replace with your Oracle DB password
+    connectString: 'localhost:1521/FREE'  // Replace with your Oracle DB connection string
+};
+
+// Serve the HTML form
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+>>>>>>> Stashed changes
 // Handle form submission
 app.post('/api/riders/register', async (req, res) => {
     const { name, phone, location, vehicle, vehicleNumber, email, password } = req.body;
@@ -404,4 +434,7 @@ app.post('/api/riders/register', async (req, res) => {
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
 });
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
