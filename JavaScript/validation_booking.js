@@ -2,26 +2,19 @@ document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('bookingForm');
     const receipt = document.querySelector('.receipt');
     const vehicleSelect = document.getElementById('vehicleType');
-    const riderPhoneInput = document.getElementById('riderPhone');
-    const vehicleNumberInput  = document.getElementById('vehicleNumber');
 
-    // Sample available riders data (this would come from your database)
+    // Sample available riders data (this would come from  database)
     const availableRiders = {
         'bike': [
-            { id: 'B1', phone: '1234567890', area: 'North' },
-            { id: 'B1', vehicleNum:'KES-23', area: 'North' },
-            { id: 'B2', phone: '2345678901', area: 'South' },
-            { id: 'B1', vehicleNum:'KID-33', area: 'South' }
+            { id: 'B1', phone: '1234567890', vehicleNum: 'KES-23', area: 'North' },
+            { id: 'B2', phone: '2345678901', vehicleNum: 'KID-33', area: 'South' }
         ],
         'car': [
-            { id: 'C1', phone: '3456789012', area: 'East' },
-            { id: 'C1', vehicleNum:'MPK-25', area: 'East' },
-            { id: 'C2', phone: '4567890123', area: 'West' },
-            { id: 'C1', vehicleNum:'NPM-45', area: 'West' },
+            { id: 'C1', phone: '3456789012', vehicleNum: 'MPK-25', area: 'East' },
+            { id: 'C2', phone: '4567890123', vehicleNum: 'NPM-45', area: 'West' }
         ],
         'van': [
-            { id: 'V1', phone: '5678901234', area: 'Central' },
-            { id: 'V1', vehicleNum: 'HEB-11', area: 'Central' }
+            { id: 'V1', phone: '5678901234', vehicleNum: 'HEB-11', area: 'Central' }
         ]
     };
 
@@ -84,18 +77,25 @@ document.addEventListener('DOMContentLoaded', function() {
         return isValid;
     }
 
+    // Variables to store selected rider details
+    let selectedRiderPhone = '';
+    let selectedVehicleNumber = '';
+
     // Handle vehicle type selection
     vehicleSelect.addEventListener('change', function() {
         const selectedType = this.value;
         if (selectedType && availableRiders[selectedType]) {
-            // In a real application, we would filter riders by area
-            const rider = availableRiders[selectedType][0];
-            riderPhoneInput.value = rider.phone;
-            const number = availableRiders[selectedType][0];
-            vehicleNumberInput.value = number.vehicleNum;
+            // Randomly select a rider from available riders for the selected vehicle type
+            const rider = availableRiders[selectedType][
+                Math.floor(Math.random() * availableRiders[selectedType].length)
+            ];
+            
+            // Store rider details
+            selectedRiderPhone = rider.phone;
+            selectedVehicleNumber = rider.vehicleNum;
         } else {
-            riderPhoneInput.value = '';
-            vehicleNumberInput.value = '';
+            selectedRiderPhone = '';
+            selectedVehicleNumber = '';
         }
     });
 
@@ -130,8 +130,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 pickupLocation: document.getElementById('pickupLocation').value,
                 destination: document.getElementById('destination').value,
                 vehicleType: document.getElementById('vehicleType').value,
-                vehicleNumber:document.getElementById('vehicleNumber').value,
-                riderPhone: document.getElementById('riderPhone').value,
+                vehicleNumber: selectedVehicleNumber,
+                riderPhone: selectedRiderPhone,
                 bookingTime: new Date().toLocaleString()
             };
 
