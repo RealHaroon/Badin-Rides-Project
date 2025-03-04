@@ -22,66 +22,65 @@ The system is built using HTML, CSS, JavaScript, and connected to a free Oracle 
 ## Files Structure
 
 ```plaintext
-/transport-service
+project-folder/
 │
 ├── /css
 │   └── styles.css
 ├── /js
 │   ├── validation_rider.js
 │   ├── validation_booking.js
-│   └── script.js
-├── /images
+│   ├── map_integration.js
+│   ├── counter.js
+├── /assets
+│   ├── images/
 │   └── background.jpg
 ├── /pages
-│   ├── Become_rider.html
+│   ├── index.html
+│   ├── become_rider.html
 │   ├── booking.html
 │   ├── login.html
-│   └── dashboard_Rider.html
-├── /db
-│   └── connect_db.js
+│   ├── dashboard_rider.html
+│   ├── service.html
+├── /database
+│   ├── db_connect.php
 └── README.md
 ```
 
-## File Descriptions
+## Project Implementation
 
-### 1. `Become_rider.html` & `validation_rider.js`
-- **Purpose**: This page allows new riders to sign up. The form includes fields such as Name, Phone Number, Location, Vehicle Type, Vehicle Number, Email, and Password. The form validates the data using JavaScript, and upon successful submission, displays a success message and redirects to the login page.
-- **File Names**:
-  - `Become_rider.html`: Contains the HTML structure and form.
-  - `validation_rider.js`: Handles form validation and the submission process.
-  - **Related Files**:
-    - `styles.css`: Custom CSS for form styling.
-    - `background.jpg`: Background image for the form page.
+### 1. Homepage (index.html)
+- Introduces the service.
+- Includes a navbar, carousel, and buttons for ride booking and rider registration.
+- Footer and navigation bar are globally included across all pages.
 
-### 2. `booking.html` & `validation_booking.js`
-- **Purpose**: This page allows customers to book a rider by providing their name, phone number, location, destination, and available vehicle. Based on the selected vehicle, the rider's phone number will be auto-filled. After submitting, a booking confirmation message is displayed.
-- **File Names**:
-  - `booking.html`: Contains the HTML structure and booking form.
-  - `validation_booking.js`: Handles form validation and the process of booking a rider.
-  - **Related Files**:
-    - `styles.css`: Custom CSS for booking form styling.
-    - `background.jpg`: Background image for the booking page.
+### 2. Become a Rider (become_rider.html & validation_rider.js)
+- Riders fill out a form with their details.
+- JavaScript validation ensures data integrity.
+- Form disappears after submission, showing a success message.
+- Rider details are stored in an Oracle database.
 
-### 3. `login.html` & `dashboard_Rider.html`
-- **Purpose**: The login page allows registered riders to log in. After a successful login, they are redirected to the `dashboard_Rider.html` page, where they can view their current and past orders, update their availability, and manage their bookings.
-- **File Names**:
-  - `login.html`: Contains the login form and redirects to the rider's dashboard after successful login.
-  - `dashboard_Rider.html`: Displays rider-specific data like recent and previous orders, and a button to toggle availability.
-  - **Related Files**:
-    - `styles.css`: Custom CSS for login and dashboard page styling.
-    - `script.js`: Handles dynamic content display and rider actions.
+### 3. Booking System (booking.html & validation_booking.js)
+- Customers enter ride details.
+- Available riders are automatically suggested.
+- Successful bookings generate confirmation messages.
 
-### 4. `connect_db.js`
-- **Purpose**: This JavaScript file connects to the free Oracle database and handles CRUD operations for users and bookings. It ensures that data is stored and validated on the server-side.
-- **File Name**: `connect_db.js`
-- **Related Files**: 
-  - **Oracle Database Setup**: Follow the steps below to create and connect your Oracle database.
+### 4. Rider Dashboard (dashboard_rider.html)
+- Displays pending and completed bookings.
+- Includes an availability toggle for riders.
 
----
+### 5. Service Page (service.html & service.js)
+- Displays service-related statistics using live data.
+- Uses Google Maps API to display service areas.
+- Fetches and updates real-time statistics from the Oracle database.
+
+### 6. Database Integration
+- Oracle Database 21Ai stores all user and booking data.
+- Connected via PHP scripts running on the XAMPP Apache Server.
+- Secure authentication and data validation are implemented.
 
 ## Steps to Set Up and Run the Project
 
-### 1. **Create and Connect to Free Oracle Database**
+### 1. Create and Connect to Free Oracle Database
 Follow these steps to set up a free Oracle database:
 
 1. **Create an Oracle Cloud Account**:
@@ -96,14 +95,13 @@ Follow these steps to set up a free Oracle database:
    - Install Oracle Instant Client on your local machine from [Oracle's official site](https://www.oracle.com/database/technologies/instant-client.html).
    - Use `Node.js` or `Python` to connect to the Oracle database via the `oracledb` package for Node.js or `cx_Oracle` for Python.
 
-### 2. **Integrate Database with JavaScript**
+### 2. Integrate Database with JavaScript
 Here’s an example of how to set up database connectivity using JavaScript:
 
 ```javascript
-// connect_db.js
+// db_connect.js
 const oracledb = require('oracledb');
 
-// Connect to the Oracle Database
 async function connectDatabase() {
     let connection;
     try {
@@ -112,7 +110,6 @@ async function connectDatabase() {
             password: "your_password",
             connectString: "your_host:your_port/your_service_name"
         });
-
         console.log('Connected to Oracle Database');
         return connection;
     } catch (err) {
@@ -123,23 +120,18 @@ async function connectDatabase() {
 module.exports = connectDatabase;
 ```
 
-This script establishes a connection to your Oracle database using the `oracledb` package. Replace the `your_username`, `your_password`, `your_host`, etc., with the actual details from your Oracle Cloud instance.
-
-### 3. **Run the Project Locally**
+### 3. Run the Project Locally
 1. Ensure all the HTML, CSS, JavaScript, and database connection files are saved in their respective directories.
-2. Open `Become_rider.html`, `booking.html`, `login.html`, and `dashboard_Rider.html` in a web browser to check how they work.
+2. Open `become_rider.html`, `booking.html`, `login.html`, and `dashboard_rider.html` in a web browser to check how they work.
 3. Run your backend server (Node.js or Python) to connect the frontend to the Oracle database and test functionalities.
 
----
+## Resources and Documentation
+- **Bootstrap Documentation**: [https://getbootstrap.com/docs/](https://getbootstrap.com/docs/)
+- **JavaScript Form Validation**: [https://developer.mozilla.org/en-US/docs/Learn/Forms/Form_validation](https://developer.mozilla.org/en-US/docs/Learn/Forms/Form_validation)
+- **Google Maps API Documentation**: [https://developers.google.com/maps/documentation/javascript](https://developers.google.com/maps/documentation/javascript)
+- **Oracle Database 21Ai**: [https://www.oracle.com/database/technologies/appdev.html](https://www.oracle.com/database/technologies/appdev.html)
+- **XAMPP Apache Server**: [https://www.apachefriends.org/index.html](https://www.apachefriends.org/index.html)
 
 ## Conclusion
-This project demonstrates a complete transport service website with user registration, ride booking, and a rider dashboard. The entire system is backed by a free Oracle database, ensuring smooth data handling and validation. By following the instructions in this README, you can set up, run, and customize the project for your needs.
-
----
-
-## Sources and References:
-1. **Oracle Cloud Free Tier**: [Oracle Cloud Free](https://www.oracle.com/cloud/free/)
-2. **Oracle Database Node.js Driver**: [Oracle Node.js](https://www.npmjs.com/package/oracledb)
-3. **Bootstrap Documentation**: [Bootstrap Docs](https://getbootstrap.com/docs/5.1/getting-started/introduction/)
-4. **W3Schools JavaScript Validation**: [JS Validation](https://www.w3schools.com/js/js_validation.asp)
+This project provides a structured approach to solving daily commuting issues while creating employment opportunities. With seamless UI/UX, robust database integration, and real-time updates, the platform ensures an efficient and user-friendly transport service.
 
