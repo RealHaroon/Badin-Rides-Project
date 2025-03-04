@@ -1,4 +1,4 @@
-# Transport Service Website - README
+# **Badin Rides** - *A Transport Service Website - README*
 
 ## Project Overview
 This project is a fully responsive website designed for a transport service, where users can register as riders, book rides, and manage their ride history. The website allows new riders to sign up, existing riders to log in, and users to book rides by selecting available riders based on their location and vehicle availability.
@@ -17,7 +17,7 @@ The system is built using HTML, CSS, JavaScript, and connected to a free Oracle 
 - **Backend**: Oracle Database (free local setup)
 - **Validation**: JavaScript
 - **Animation**: CSS for smooth animations
-- **Database Connectivity**: JavaScript (via AJAX or direct API calls)
+- **Database Connectivity**: PHP
 
 ## Files Structure
 
@@ -93,37 +93,36 @@ Follow these steps to set up a free Oracle database:
 
 3. **Connect to Database Locally**:
    - Install Oracle Instant Client on your local machine from [Oracle's official site](https://www.oracle.com/database/technologies/instant-client.html).
-   - Use `Node.js` or `Python` to connect to the Oracle database via the `oracledb` package for Node.js or `cx_Oracle` for Python.
+   - Use PHP to connect to the Oracle database via the `oci_connect` function.
 
-### 2. Integrate Database with JavaScript
-Here’s an example of how to set up database connectivity using JavaScript:
+### 2. Integrate Database with PHP
+Here’s an example of how to set up database connectivity using PHP:
 
-```javascript
-// db_connect.js
-const oracledb = require('oracledb');
+```php
+// db_connect.php
+<?php
+$host = "your_host";
+$port = "your_port";
+$service_name = "your_service_name";
+$username = "your_username";
+$password = "your_password";
 
-async function connectDatabase() {
-    let connection;
-    try {
-        connection = await oracledb.getConnection({
-            user: "your_username",
-            password: "your_password",
-            connectString: "your_host:your_port/your_service_name"
-        });
-        console.log('Connected to Oracle Database');
-        return connection;
-    } catch (err) {
-        console.error('Error connecting to Oracle Database', err);
-    }
+$connection_string = "(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=$host)(PORT=$port))(CONNECT_DATA=(SERVICE_NAME=$service_name)))";
+
+$conn = oci_connect($username, $password, $connection_string);
+if (!$conn) {
+    $error = oci_error();
+    die("Error connecting to Oracle Database: " . $error['message']);
+} else {
+    echo "Connected to Oracle Database";
 }
-
-module.exports = connectDatabase;
+?>
 ```
 
 ### 3. Run the Project Locally
 1. Ensure all the HTML, CSS, JavaScript, and database connection files are saved in their respective directories.
 2. Open `become_rider.html`, `booking.html`, `login.html`, and `dashboard_rider.html` in a web browser to check how they work.
-3. Run your backend server (Node.js or Python) to connect the frontend to the Oracle database and test functionalities.
+3. Run your backend server (PHP on XAMPP) to connect the frontend to the Oracle database and test functionalities.
 
 ## Resources and Documentation
 - **Bootstrap Documentation**: [https://getbootstrap.com/docs/](https://getbootstrap.com/docs/)
@@ -134,4 +133,3 @@ module.exports = connectDatabase;
 
 ## Conclusion
 This project provides a structured approach to solving daily commuting issues while creating employment opportunities. With seamless UI/UX, robust database integration, and real-time updates, the platform ensures an efficient and user-friendly transport service.
-
