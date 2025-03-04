@@ -129,7 +129,7 @@ module.exports = connectDatabase;
 - **Bootstrap Documentation**: [https://getbootstrap.com/docs/](https://getbootstrap.com/docs/)
 - **JavaScript Form Validation**: [https://developer.mozilla.org/en-US/docs/Learn/Forms/Form_validation](https://developer.mozilla.org/en-US/docs/Learn/Forms/Form_validation)
 - **Google Maps API Documentation**: [https://developers.google.com/maps/documentation/javascript](https://developers.google.com/maps/documentation/javascript)
-- **Oracle Database 21Ai**: [https://www.oracle.com/database/technologies/appdev.html](https://www.oracle.com/database/technologies/appdev.html)
+- **Oracle Database 23Ai**: [https://www.oracle.com/database/technologies/appdev.html](https://www.oracle.com/database/technologies/appdev.html)
 - **XAMPP Apache Server**: [https://www.apachefriends.org/index.html](https://www.apachefriends.org/index.html)
 
 ## Conclusion
