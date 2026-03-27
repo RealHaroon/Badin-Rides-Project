@@ -1,6 +1,6 @@
 // State management for rider availability
 let isAvailable = true;
-import { apiCall } from './api_config.js';
+import { apiCall } from './api_config.js'; 
 
 let riderId = localStorage.getItem('riderId');
 // DOM Elements
